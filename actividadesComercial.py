@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 # Configuración inicial
 file_path = r"C:\Users\Admin Local\Downloads\Informe de Actividades.csv"
-save_path = "C:/Users/Admin Local/OneDrive - PUNTO EMPLEO S.A/Automatizacion/Comercial_reporte_de_actividades"
+save_path = "C:/Users/Admin Local/OneDrive - PUNTO EMPLEO S.A/Automatizacion/Proyecto reporte de actividades COMERCIAL/Comercial_reporte_de_actividades"
 
 # Verificar que la ruta de guardado exista
 if not os.path.exists(save_path):
@@ -57,19 +57,19 @@ data['Calendarios Start Date and Time'] = pd.to_datetime(data['Calendarios Start
 # Obtener la fecha de ejecución actual
 fecha_actual = datetime.now()
 
-# Calcular el lunes pasado (hace 9 días) a las 7 a.m.
+# Calcular el lunes pasado (hace 7 días) a las 7 a.m.
 def obtener_lunes_pasado(fecha_actual):
     # Encontrar el lunes más reciente
     dia_semana = fecha_actual.weekday()
-    # Retroceder hasta el lunes pasado (hace 9 días)
-    lunes_reciente = fecha_actual - timedelta(days=dia_semana + 7 + 2)  # Retroceder al lunes de la semana anterior (+9 días)
+    # Retroceder hasta el lunes pasado (hace 7 días)
+    lunes_reciente = fecha_actual - timedelta(days=dia_semana + 7)  # Retroceder al lunes de la semana anterior (+7 días)
     lunes_reciente = lunes_reciente.replace(hour=7, minute=0, second=0, microsecond=0)
     return lunes_reciente
 
 # Calcular el lunes pasado a las 7 a.m.
 lunes_pasado_7am = obtener_lunes_pasado(fecha_actual)
 
-# Calcular días festivos dentro del rango (desde hace 9 días hasta hoy)
+# Calcular días festivos dentro del rango (desde hace 7 días hasta hoy)
 dias_festivos_en_semana = [pd.to_datetime(day) for day in dias_festivos if lunes_pasado_7am <= pd.to_datetime(day) <= fecha_actual]
 festivos = len(dias_festivos_en_semana)
 
